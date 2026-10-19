@@ -48,7 +48,28 @@ h2.sec{font-size:clamp(26px,3.6vw,38px);margin-bottom:8px}
 .panel li:last-child{border-bottom:0}
 .panel li::before{content:"◆";position:absolute;left:2px;color:var(--gold);font-size:11px;top:11px}
 
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(20,15,5,.92);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+.lb.open{display:flex}
+.lb img{max-width:min(94vw,1400px);max-height:84vh;width:auto;height:auto;border-radius:8px;box-shadow:0 10px 60px rgba(0,0,0,.6)}
+.lb .cap{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#e8dcc4;font-size:14px;font-style:italic}
+.lb .x{position:absolute;top:12px;right:18px;color:#fff;font-size:34px;line-height:1;cursor:pointer;user-select:none}
+.lb .arr{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:42px;cursor:pointer;user-select:none;padding:16px 12px;background:rgba(0,0,0,.3);border-radius:8px}
+.lb .prev{left:8px}.lb .next{right:8px}
+img.zoomable{cursor:zoom-in}
+
 /* timeline days */
+.moments .hint{text-align:center;color:var(--muted);font-style:italic;margin-bottom:26px;font-size:16px}
+.m-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:760px){.m-grid{grid-template-columns:1fr}}
+.m-card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.m-card figure{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--sand)}
+.m-card figure img{transition:transform .3s ease}
+.m-card:hover figure img{transform:scale(1.04)}
+.m-card .body{padding:16px 18px 18px}
+.m-card .when{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.m-card h3{font-size:18px;margin:5px 0 6px}
+.m-card p{font-size:16px;color:var(--ink)}
 .day{display:grid;grid-template-columns:210px 1fr;gap:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:22px}
 @media(max-width:760px){.day{grid-template-columns:1fr}}
 .day .photo{position:relative;min-height:220px}
@@ -143,7 +164,7 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
     <p class="lead">«В Ташкенте скучновато» — полуправда: мегаследов вроде Регистана там нет, но два полных дня встают идеально.</p>
 
     <div class="day">
-      <div class="photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Tashkentatnight.jpg/1280px-Tashkentatnight.jpg" alt="Ташкент вечером"><div class="cap">Ташкент вечером</div></div>
+      <div class="photo"><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Tashkentatnight.jpg/1280px-Tashkentatnight.jpg" alt="Ташкент вечером"><div class="cap">Ташкент вечером</div></div>
       <div class="body">
         <div class="num">День 1 · пятница, 24 октября</div>
         <h3>Прилёт, старый город на закате</h3>
@@ -157,7 +178,7 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
     </div>
 
     <div class="day">
-      <div class="photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Chorsu_Bazaar%2C_Tashkent%2C_Uzbekistan_-_2019-06-01_7.jpg/1280px-Chorsu_Bazaar%2C_Tashkent%2C_Uzbekistan_-_2019-06-01_7.jpg" alt="Базар Чорсу"><div class="cap">Чорсу — главный рынок города под куполом 1980-х</div></div>
+      <div class="photo"><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Chorsu_Bazaar%2C_Tashkent%2C_Uzbekistan_-_2019-06-01_7.jpg/1280px-Chorsu_Bazaar%2C_Tashkent%2C_Uzbekistan_-_2019-06-01_7.jpg" alt="Базар Чорсу"><div class="cap">Чорсу — главный рынок города под куполом 1980-х</div></div>
       <div class="body">
         <div class="num">День 2 · суббота</div>
         <h3>Старый Ташкент пешком</h3>
@@ -172,8 +193,46 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
       </div>
     </div>
 
+    <div class="strip">
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Mercado_de_Chorsu_07.jpg/1280px-Mercado_de_Chorsu_07.jpg" alt="Специи на Чорсу"><figcaption>Специи на Чорсу — кликните, чтобы рассмотреть</figcaption></figure>
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Samovar_left_side.png/1280px-Samovar_left_side.png" alt="Самовар"><figcaption>Чай из самовара — ритуал каждого вечера</figcaption></figure>
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/18_Taller_cer%C3%A0mic_de_Rustam_Usmanov%2C_Burhoniddin_Roshidoni_Ko%27chasi_6_%28Rixtan%29.jpg/1280px-18_Taller_cer%C3%A0mic_de_Rustam_Usmanov%2C_Burhoniddin_Roshidoni_Ko%27chasi_6_%28Rixtan%29.jpg" alt="Риштанская керамика"><figcaption>Риштанская керамика — такую повезёте домой</figcaption></figure>
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Uzbek-suzani-motives-1120284.jpg/1280px-Uzbek-suzani-motives-1120284.jpg" alt="Сюзане"><figcaption>Сюзане — вышивка, которую вы привезёте</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-kicker">День 2–3 · после базаров</div>
+    <h2 class="sec">Ваши вечера в Ташкенте</h2>
+    <p class="lead">Города здесь живут вечером, когда спадает жара и включаются купола.</p>
+    <div class="m-grid">
+      <div class="m-card">
+        <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Tashkent_city_8.jpg/1280px-Tashkent_city_8.jpg" alt="Ташкент-Сити"></figure>
+        <div class="body">
+          <div class="when">Вечер · Ташкент</div>
+          <h3>Вы у фонтана в Ташкент-Сити</h3>
+          <p>Кофе с кардамоном, музыка фонтана, стеклянные башни над головой. Выберете столик у воды и будете сидеть до закрытия.</p>
+        </div>
+      </div>
+      <div class="m-card">
+        <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Samovar_right_side.png/1280px-Samovar_right_side.png" alt="Чайная"></figure>
+        <div class="body">
+          <div class="when">Вечер · старый город</div>
+          <h3>Чай вдвоём на топчане</h3>
+          <p>Зелёный чай, лепёшка из тандыра, урюк. Хозяин чайханы нальёт вам третью пиалу сам — так здесь говорят «оставайтесь».</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-kicker">Дни 3–5 · продолжение</div>
     <div class="day">
-      <div class="photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Tashkent_city_8.jpg/1280px-Tashkent_city_8.jpg" alt="Ташкент-Сити"><div class="cap">Ташкент-Сити — новый деловой центр</div></div>
+      <div class="photo"><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/115_Amir_Temur_Xiyoboni_%28Taixkent%29%2C_amb_el_Palau_dels_F%C3%B2rums_Internacionals.jpg/1280px-115_Amir_Temur_Xiyoboni_%28Taixkent%29%2C_amb_el_Palau_dels_F%C3%B2rums_Internacionals.jpg" alt="Сквер Амира Темура"><div class="cap">Сквер Амира Темура — парадный центр</div></div>
       <div class="body">
         <div class="num">День 3 · воскресенье</div>
         <h3>Новый Ташкент</h3>
@@ -188,7 +247,7 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
     </div>
 
     <div class="day">
-      <div class="photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Samarkanda_IGP2772.jpg/1280px-Samarkanda_IGP2772.jpg" alt="Гур-Эмир"><div class="cap">Гур-Эмир — мавзолей Тамерлана</div></div>
+      <div class="photo"><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/Samarkanda_IGP2772.jpg/1280px-Samarkanda_IGP2772.jpg" alt="Гур-Эмир"><div class="cap">Гур-Эмир — мавзолей Тамерлана</div></div>
       <div class="body">
         <div class="num">День 4 · понедельник</div>
         <h3>Утренний «Афросиаб» → Самарканд</h3>
@@ -203,7 +262,7 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
     </div>
 
     <div class="day">
-      <div class="photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Shah-i-Zinda_%288145369659%29.jpg/1280px-Shah-i-Zinda_%288145369659%29.jpg" alt="Шахи-Зинда"><div class="cap">Шахи-Зинда — ансамбль мавзолеев, главное впечатление Самарканда</div></div>
+      <div class="photo"><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Shah-i-Zinda_%288145369659%29.jpg/1280px-Shah-i-Zinda_%288145369659%29.jpg" alt="Шахи-Зинда"><div class="cap">Шахи-Зинда — ансамбль мавзолеев, главное впечатление Самарканда</div></div>
       <div class="body">
         <div class="num">День 5 · вторник</div>
         <h3>Самарканд: утро и развилка</h3>
@@ -214,6 +273,55 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
           <li>Днём — по выбранной ветке: либо вечерний поезд в Бухару, либо возврат в Ташкент</li>
         </ol>
         <div class="note"><b>Шахи-Зинда</b> — то, ради чего вообще едут в Самарканд. Не сокрушайтесь, если Регистан покажется туристическим — просто дойдите до верха лестницы Шахи-Зинды.</div>
+      </div>
+    </div>
+
+    <div class="strip">
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Sher-Dor_Madrasah_Samarkand.jpg/1280px-Sher-Dor_Madrasah_Samarkand.jpg" alt="Шер-Дор"><figcaption>Шер-Дор: львы на фасаде — дерзость для ислама XVII в.</figcaption></figure>
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/Antiquities_of_Samarkand._Mausoleum_of_the_Emir_Timur_Kuragan_%28Gur-Emir%29._Interior_of_the_Tomb._View_of_the_Family_Crypt_of_Tamerlane_WDL3574.png/1280px-Antiquities_of_Samarkand._Mausoleum_of_the_Emir_Timur_Kuragan_%28Gur-Emir%29._Interior_of_the_Tomb._View_of_the_Family_Crypt_of_Tamerlane_WDL3574.png" alt="Внутри Гур-Эмира"><figcaption>Внутри Гур-Эмира: золото и лазурь</figcaption></figure>
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Samarkand_Samsa_%28Sambusa%29.jpg/1280px-Samarkand_Samsa_%28Sambusa%29.jpg" alt="Самса"><figcaption>Самса из тандыра — обед второго дня</figcaption></figure>
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d1/Uzbek_Bukhara_Melons_%2825892347334%29.jpg/1280px-Uzbek_Bukhara_Melons_%2825892347334%29.jpg" alt="Дыни"><figcaption>Дыни на Сиабе — октябрь, ещё сезон</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap moments">
+    <div class="sec-kicker">Как это будете помнить вы</div>
+    <h2 class="sec">Ваши моменты</h2>
+    <p class="hint">План — планами, а запомнится вот это.</p>
+    <div class="m-grid">
+      <div class="m-card">
+        <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/RegistanSquare_Samarkand.jpg/1280px-RegistanSquare_Samarkand.jpg" alt="Регистан на рассвете"></figure>
+        <div class="body">
+          <div class="when">День 4 · рассвет · Самарканд</div>
+          <h3>Вы стоите на пустом Регистане</h3>
+          <p>Выйдете к семи утра, пока город спит. Три медресе, ни одного человека, только голубь взлетает с купола. Первый час дня — только ваш.</p>
+        </div>
+      </div>
+      <div class="m-card">
+        <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/10_kg_plov_at_wedding_ceremony.jpg/1280px-10_kg_plov_at_wedding_ceremony.jpg" alt="Плов на двоих"></figure>
+        <div class="body">
+          <div class="when">Вечер · любой день</div>
+          <h3>Плов, после которого не нужен ужин</h3>
+          <p>Один казан на двоих — не назовёшь скромным, но вы справитесь. Официант будет искренне рад, а вы будете понимать почему.</p>
+        </div>
+      </div>
+      <div class="m-card">
+        <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/45_Lab-i_Hauz_complex_1810.jpg/1280px-45_Lab-i_Hauz_complex_1810.jpg" alt="Ляби-Хауз вечером"></figure>
+        <div class="body">
+          <div class="when">Ветка Бухара · вечер</div>
+          <h3>Ужин у пруда Ляби-Хауз</h3>
+          <p>Столик под тутовником, шашлык и зелёный чай. Смотрится на огни медресе, слушается вода. Сюда вы вернётесь и на следующий вечер.</p>
+        </div>
+      </div>
+      <div class="m-card">
+        <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Chimgan_Mountains.jpg/1280px-Chimgan_Mountains.jpg" alt="Чимган"></figure>
+        <div class="body">
+          <div class="when">Ветка Горы · полдень</div>
+          <h3>Наверху, где кончается город</h3>
+          <p>Канатка поднимет вас над долиной, наверху — первый снег и тишина. Фото, где вы вдвоём на фоне хребта, станет главным за поездку.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -237,7 +345,7 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
 
     <div id="branch-a" class="branch show">
       <div class="day">
-        <div class="photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Poi_Kalon.jpg/1280px-Poi_Kalon.jpg" alt="Пои-Калян"><div class="cap">Ансамбль Пои-Калян: минарет 1127 года</div></div>
+        <div class="photo"><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Poi_Kalon.jpg/1280px-Poi_Kalon.jpg" alt="Пои-Калян"><div class="cap">Ансамбль Пои-Калян: минарет 1127 года</div></div>
         <div class="body">
           <div class="num">День 6 · среда</div>
           <h3>Самарканд → Бухара</h3>
@@ -252,7 +360,7 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
         </div>
       </div>
       <div class="day">
-        <div class="photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Ark_of_Bukhara_%28%D0%A6%D0%B8%D1%82%D0%B0%D0%B4%D0%B5%D0%BB%D1%8C_%D0%90%D1%80%D0%BA._Buxoro_arki%29.jpg/1280px-Ark_of_Bukhara_%28%D0%A6%D0%B8%D1%82%D0%B0%D0%B4%D0%B5%D0%BB%D1%8C_%D0%90%D1%80%D0%BA._Buxoro_arki%29.jpg" alt="Арк"><div class="cap">Арк — цитадель правителей Бухары</div></div>
+        <div class="photo"><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Ark_of_Bukhara_%28%D0%A6%D0%B8%D1%82%D0%B0%D0%B4%D0%B5%D0%BB%D1%8C_%D0%90%D1%80%D0%BA._Buxoro_arki%29.jpg/1280px-Ark_of_Bukhara_%28%D0%A6%D0%B8%D1%82%D0%B0%D0%B4%D0%B5%D0%BB%D1%8C_%D0%90%D1%80%D0%BA._Buxoro_arki%29.jpg" alt="Арк"><div class="cap">Арк — цитадель правителей Бухары</div></div>
         <div class="body">
           <div class="num">День 7 · четверг</div>
           <h3>Бухара: Арк, мавзолей Саманидов и возврат</h3>
@@ -269,7 +377,7 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
 
     <div id="branch-b" class="branch">
       <div class="day">
-        <div class="photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Charvak_Reservoir_%282%29.jpg/1280px-Charvak_Reservoir_%282%29.jpg" alt="Чарвак"><div class="cap">Чарвакское водохранилище, ~1000 м над уровнем моря</div></div>
+        <div class="photo"><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Charvak_Reservoir_%282%29.jpg/1280px-Charvak_Reservoir_%282%29.jpg" alt="Чарвак"><div class="cap">Чарвакское водохранилище, ~1000 м над уровнем моря</div></div>
         <div class="body">
           <div class="num">День 6 · среда</div>
           <h3>Самарканд → Ташкент → Чарвак</h3>
@@ -282,7 +390,7 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
         </div>
       </div>
       <div class="day">
-        <div class="photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Chimgan_Mountains.jpg/1280px-Chimgan_Mountains.jpg" alt="Чимган"><div class="cap">Больший Чимган, 3309 м — Тянь-Шань у Ташкента</div></div>
+        <div class="photo"><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Chimgan_Mountains.jpg/1280px-Chimgan_Mountains.jpg" alt="Чимган"><div class="cap">Больший Чимган, 3309 м — Тянь-Шань у Ташкента</div></div>
         <div class="body">
           <div class="num">День 7 · четверг</div>
           <h3>Чимган: канатка и перевал</h3>
@@ -298,7 +406,7 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
     </div>
 
     <div class="day">
-      <div class="photo"><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Dry_Fruits_in_Siyob_Bazaar..JPG/1280px-Dry_Fruits_in_Siyob_Bazaar..JPG" alt="Сухофрукты"><div class="cap">Сухофрукты и специи — главный груз обратного рейса</div></div>
+      <div class="photo"><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Dry_Fruits_in_Siyob_Bazaar..JPG/1280px-Dry_Fruits_in_Siyob_Bazaar..JPG" alt="Сухофрукты"><div class="cap">Сухофрукты и специи — главный груз обратного рейса</div></div>
       <div class="body">
         <div class="num">Дни 8–9 · пятница–суббота</div>
         <h3>Запасной день и вылет</h3>
@@ -348,10 +456,10 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
     </div>
 
     <div class="strip">
-      <figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Hazrat_Imam_01.jpg/1280px-Hazrat_Imam_01.jpg" alt="Хаст-Имам"><figcaption>Хаст-Имам, Ташкент</figcaption></figure>
-      <figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Kosmonavtlar_Station_of_Tashkent_Metro_6.jpg/1280px-Kosmonavtlar_Station_of_Tashkent_Metro_6.jpg" alt="Метро Космонавтлар"><figcaption>Метро «Космонавтлар»</figcaption></figure>
-      <figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/45_Lab-i_Hauz_complex_1810.jpg/1280px-45_Lab-i_Hauz_complex_1810.jpg" alt="Ляби-Хауз"><figcaption>Ляби-Хауз, Бухара</figcaption></figure>
-      <figure><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Charvak_Reservoir_%282%29.jpg/1280px-Charvak_Reservoir_%282%29.jpg" alt="Чарвак и горы"><figcaption>Чарвак: вода и хребты</figcaption></figure>
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Hazrat_Imam_01.jpg/1280px-Hazrat_Imam_01.jpg" alt="Хаст-Имам"><figcaption>Хаст-Имам, Ташкент</figcaption></figure>
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Kosmonavtlar_Station_of_Tashkent_Metro_6.jpg/1280px-Kosmonavtlar_Station_of_Tashkent_Metro_6.jpg" alt="Метро Космонавтлар"><figcaption>Метро «Космонавтлар»</figcaption></figure>
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/45_Lab-i_Hauz_complex_1810.jpg/1280px-45_Lab-i_Hauz_complex_1810.jpg" alt="Ляби-Хауз"><figcaption>Ляби-Хауз, Бухара</figcaption></figure>
+      <figure><img class="zoomable" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Charvak_Reservoir_%282%29.jpg/1280px-Charvak_Reservoir_%282%29.jpg" alt="Чарвак и горы"><figcaption>Чарвак: вода и хребты</figcaption></figure>
            </div>
   </div>
 </section>
@@ -362,6 +470,14 @@ footer{padding:36px 0 48px;color:var(--muted);font-size:13.5px;border-top:1px so
   </div>
 </footer>
 
+<div class="lb" id="lb" role="dialog" aria-label="Просмотр фото">
+  <span class="x" id="lb-x" aria-label="Закрыть">&times;</span>
+  <span class="arr prev" id="lb-prev" aria-label="Предыдущее">&#8592;</span>
+  <img id="lb-img" src="" alt="">
+  <span class="arr next" id="lb-next" aria-label="Следующее">&#8594;</span>
+  <div class="cap" id="lb-cap"></div>
+</div>
+
 <script>
 function setBranch(b){
   var a=document.getElementById('branch-a'), bb=document.getElementById('branch-b');
@@ -371,6 +487,36 @@ function setBranch(b){
   ba.className = b==='a' ? 'on-a' : '';
   bb2.className = b==='b' ? 'on-b' : '';
 }
+
+/* lightbox */
+(function(){
+  var lb=document.getElementById('lb'), img=document.getElementById('lb-img'), cap=document.getElementById('lb-cap');
+  var items=[].slice.call(document.querySelectorAll('img.zoomable'));
+  var cur=0;
+  function open(i){
+    cur=(i+items.length)%items.length;
+    var el=items[cur];
+    img.src=el.src; img.alt=el.alt||'';
+    var c=el.closest('figure');
+    var capEl=c?c.querySelector('figcaption'):null;
+    var dayCap=el.parentElement&&el.parentElement.classList.contains('photo')?el.parentElement.querySelector('.cap'):null;
+    cap.textContent=(capEl?capEl.textContent:(dayCap?dayCap.textContent:(el.alt||'')));
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
+  function close(){lb.classList.remove('open');document.body.style.overflow='';}
+  items.forEach(function(el,i){el.addEventListener('click',function(){open(i);});});
+  document.getElementById('lb-x').addEventListener('click',close);
+  document.getElementById('lb-prev').addEventListener('click',function(e){e.stopPropagation();open(cur-1);});
+  document.getElementById('lb-next').addEventListener('click',function(e){e.stopPropagation();open(cur+1);});
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowLeft')open(cur-1);
+    if(e.key==='ArrowRight')open(cur+1);
+  });
+})();
 </script>
 </body>
 </html>
